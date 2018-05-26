@@ -1,0 +1,69 @@
+group 'com.test'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.RELEASE'
+        lombokVersion = '1.16.18'
+        micrometerVersion = "1.0.2"
+    }
+    repositories {
+        mavenCentral()
+
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("io.jsonwebtoken:jjwt:0.9.0")
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    // to enable hot swapping
+    compile("org.springframework.boot:spring-boot-devtools")
+
+    compile "io.springfox:springfox-swagger2:2.7.0"
+    compile 'io.springfox:springfox-swagger-ui:2.7.0'
+
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile("io.micrometer:micrometer-registry-prometheus:$micrometerVersion")
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+
+
+
+
+
+    // to incluce external jar in libs folder
+    compile fileTree(dir: 'libs', include: '*.jar')
+
+    runtime('org.postgresql:postgresql')
+    //runtime 'com.h2database:h2'
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4'
+}

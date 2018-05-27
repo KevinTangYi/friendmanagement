@@ -8,6 +8,7 @@ import com.test.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class SubscribeService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public boolean connectSubscribe(SubscribeDTO newCreation){
 
         String requestorEmail = newCreation.getRequestor();
@@ -41,6 +43,7 @@ public class SubscribeService {
         return false;
     }
 
+    @Transactional
     public boolean blockUpdate(SubscribeDTO newCreation){
 
         String requestorEmail = newCreation.getRequestor();
@@ -58,6 +61,7 @@ public class SubscribeService {
         return false;
     }
 
+    @Transactional
     public List<String> emailsList(RecipientsRequestDTO requestDTO){
         String text = requestDTO.getText();
         String senderEmail = requestDTO.getSender();
@@ -93,25 +97,4 @@ public class SubscribeService {
         return RecipientEmails;
     }
 
-    public List<String> commonFriendsList(FriendsDTO emails){
-        List<String> commonFriendsList = new ArrayList<>();
-        Optional<User> user1 = userRepository.findUserByEmail(emails.getFriends()[0]);
-        Optional<User> user2 = userRepository.findUserByEmail(emails.getFriends()[1]);
-
-        if(user1.isPresent() && user2.isPresent()){
-            List<String> friendsList1 = user1.get().getFriends();
-            List<String> friendsList2 = user2.get().getFriends();
-
-            if(!friendsList1.isEmpty() && !friendsList2.isEmpty()) {
-                friendsList1.forEach(friend -> {
-                    if (friendsList2.contains(friend))
-                        commonFriendsList.add(friend);
-                });
-
-                return commonFriendsList;
-            }
-        }
-
-        return null;
-    }
 }

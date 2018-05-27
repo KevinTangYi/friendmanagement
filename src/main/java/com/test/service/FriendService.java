@@ -6,6 +6,7 @@ import com.test.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class FriendService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public boolean connectFriends(FriendsDTO newCreation){
 
         String email1 = newCreation.getFriends()[0];
@@ -28,17 +30,23 @@ public class FriendService {
         if(user1.isPresent() && user2.isPresent()){
             User userA = user1.get();
             User userB = user2.get();
-            userA.getFriends().add(userB.getEmail());
-            userB.getFriends().add(userA.getEmail());
-            userRepository.save(userA);
-            userRepository.save(userB);
+           List<String> blockListA = userRepository.findUserByEmail(email1).get().getBlock();
+           List<String> blockListB = userRepository.findUserByEmail(email2).get().getBlock();
+           if (!blockListA.contains(email2) && !blockListB.contains(email1)) {
+                userA.getFriends().add(userB.getEmail());
+                userB.getFriends().add(userA.getEmail());
+                userRepository.save(userA);
+                userRepository.save(userB);
+                return true;
+            }else
+                return false;
 
-            return true;
         }
 
         return false;
     }
 
+    @Transactional
     public List<String> friendsList(String email){
         Optional<User> user = userRepository.findUserByEmail(email);
 
@@ -49,6 +57,7 @@ public class FriendService {
         return null;
     }
 
+    @Transactional
     public List<String> commonFriendsList(FriendsDTO emails){
         List<String> commonFriendsList = new ArrayList<>();
         Optional<User> user1 = userRepository.findUserByEmail(emails.getFriends()[0]);

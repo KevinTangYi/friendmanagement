@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ApiModel(value="FriendsCreationDTO", description="Create friends connection Object")
-public class FriendsCreationDTO {
+@ApiModel(value="FriendsDTO", description="Create friends connection Object")
+public class FriendsDTO {
 
     private String[] friends;
 

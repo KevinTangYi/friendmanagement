@@ -1,7 +1,6 @@
 package com.test.service;
 
-import com.test.model.User;
-import com.test.model.dto.FriendsCreationDTO;
+import com.test.model.dto.FriendsDTO;
 import com.test.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class Bootstrap {
         userRepository.save(userService.toUser(null,"Sara","sara@gmail.com","123456",null));
         userRepository.save(userService.toUser(null,"Andy","andy@example.com","123456",null));
         userRepository.save(userService.toUser(null,"John","john@example.com","123456",null));
-        FriendsCreationDTO newCreation= new FriendsCreationDTO();
+        FriendsDTO newCreation= new FriendsDTO();
         newCreation.setFriends(new String[]{"harry@gmail.com","john@example.com"});
         friendService.connectFriends(newCreation);
     }

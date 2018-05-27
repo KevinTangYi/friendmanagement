@@ -42,5 +42,12 @@ public class User{
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> friends = new ArrayList<>();
 
-    //private List<String> friendsList = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<String> subscribes = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<String> followers = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<String> block = new ArrayList<>();
 }

@@ -35,9 +35,9 @@ spring:
   profiles: dev
   datasource:
     platform: postgres
-    url: jdbc:postgresql://${PARTNER_DB_HOST:localhost}:${PARTNER_DB_PORT:5432}/${PARTNER_DB_NAME:yitang}
-    username: yitang
-    password: 891124Tyr
+    url: jdbc:postgresql://${PARTNER_DB_HOST:localhost}:${PARTNER_DB_PORT:5432}/${PARTNER_DB_NAME:test}
+    username: admin
+    password: admin
     driver-class-name: org.postgresql.Driver
   jpa:
     database: POSTGRESQL

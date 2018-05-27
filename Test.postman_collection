@@ -1,0 +1,131 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Test",
+		"_postman_id": "ce79e744-f9aa-9bc2-d9ab-0886872b7fbc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8081/api/friend/create",
+			"request": {
+				"url": "http://localhost:8081/api/friend/create",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friends\":\n    [\n      \"andy@example.com\",\n      \"john@example.com\"\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/friend",
+			"request": {
+				"url": "http://localhost:8081/api/friend/get/friends",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"andy@example.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/friend/get/commonfriends",
+			"request": {
+				"url": "http://localhost:8081/api/friend/get/commonfriends",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friends\": \n  [\n  \t\"andy@example.com\",\n\t\"john@example.com\"\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/subscribe/create",
+			"request": {
+				"url": "http://localhost:8081/api/subscribe/create",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestor\": \"andy@example.com\",\n  \"target\": \"john@example.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/subscribe/block",
+			"request": {
+				"url": "http://localhost:8081/api/subscribe/block",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestor\": \"andy@example.com\",\n  \"target\": \"john@example.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/subscribe/get",
+			"request": {
+				"url": "http://localhost:8081/api/subscribe/get",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"sender\":  \"john@example.com\",\n  \"text\": \"Hello World! sara@gmail.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
